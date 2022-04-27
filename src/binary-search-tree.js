@@ -17,9 +17,24 @@ class BinarySearchTree {
   }
 
   add(data) {
-    if (!this.tree) {
-      return new Node(data);
+    this.tree = add(this.tree, data);
+
+    function add(node, data) {
+      if (!node) {
+        return new Node(data);
+      }
+      if (data === node.data) {
+        return node;
+      }
+      if (data < node.data) {
+        node.left = add(node.left, data)
+      } else {
+        node.right = add(node.right, data)
+      }
+      return node;
     }
+
+
   }
 
   has(/* data */) {
