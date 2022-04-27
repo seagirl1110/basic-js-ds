@@ -25,13 +25,7 @@ const { NotImplementedError } = require('../extensions/index.js');
 
 function removeKFromList(l, k) {
   let list = l;
-  // console.log('list', list);
-
-  // console.log(`next`, list.next);
-
   const index = findIndex(list, k);
-
-  console.log('index', index);
 
   if (index < 0) { return }
 
@@ -42,24 +36,18 @@ function removeKFromList(l, k) {
     let prev = null;
     let current = list;
 
-    let i = 0;
-    while (i < index) {
-      console.log('i', i)
-      console.log('prev', prev);
-      console.log('current', current);
+    for (let i = 0; i < index; i += 1) {
       prev = current;
-      console.log('prev', prev);
       current = current.next;
-      console.log('current', current);
-
-
-      i += 1;
     }
     prev.next = current.next;
-
-    // return removeKFromList(list, k);
+   
+    if (current.next !== null && current.next.value === k) {
+      current = current.next;
+      prev.next = current.next;
+    }
   }
-  // console.log('finish list', list);
+
   return list;
 }
 
@@ -67,23 +55,12 @@ function findIndex(l, k) {
   let list = l;
   let index = 0;
 
-
-  // console.log(`next of index`, list.next);
-
   while (list.value) {
-    const current = list.value;
-    // console.log('index', index)
-    // console.log(`current`, current);
-    // console.log('list', list);
-    // console.log(`next`, list.next);
-    if (current === k) {
+    if (list.value === k) {
       return index;
     } else {
       list = list.next;
     }
-
-    // console.log(`next`, list.next);
-
     index += 1;
   }
 
